@@ -8,7 +8,10 @@ import theme from '@/src/theme';
 import createEmotionCache from '@/src/createEmotionCache';
 import AppHeader from '@/src/components/AppHeader';
 import AppFooter from '@/src/components/AppFooter';
+import { SnackbarProvider } from 'notistack';
 import { useRouter } from 'next/router';
+import { AuthProvider } from '@/src/contexts/AuthContext';
+import { ApiProvider } from '@/src/contexts/ApiContext';
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -30,9 +33,14 @@ export default function MyApp(props: MyAppProps) {
       </Head>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <AppHeader></AppHeader>
-        <Component {...pageProps} />
-        <AppFooter onChange={onFooterChange}></AppFooter>
+        <SnackbarProvider maxSnack={10} />
+        <AuthProvider>
+          <ApiProvider>
+            <AppHeader></AppHeader>
+            <Component {...pageProps} />
+            <AppFooter onChange={onFooterChange}></AppFooter>
+          </ApiProvider>
+        </AuthProvider>
       </ThemeProvider>
     </CacheProvider>
   );
