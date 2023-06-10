@@ -1,5 +1,5 @@
-import React, {useState} from 'react'
-import { Tooltip, IconButton, Menu, MenuItem, Divider } from "@mui/material"
+import React from 'react'
+import { Tooltip, IconButton, Menu, Divider } from "@mui/material"
 import LogoutMenuItem from './LogoutMenuItem';
 import { Menu as MenuIcon } from '@mui/icons-material';
 

@@ -33,14 +33,15 @@ export default function MyApp(props: MyAppProps) {
       </Head>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <SnackbarProvider maxSnack={10} />
-        <AuthProvider>
-          <ApiProvider>
-            <AppHeader></AppHeader>
-            <Component {...pageProps} />
-            <AppFooter onChange={onFooterChange}></AppFooter>
-          </ApiProvider>
-        </AuthProvider>
+        <SnackbarProvider maxSnack={10}>
+          <AuthProvider>
+            <ApiProvider>
+              <AppHeader></AppHeader>
+              <Component {...pageProps} />
+              <AppFooter onChange={onFooterChange}></AppFooter>
+            </ApiProvider>
+          </AuthProvider>
+        </SnackbarProvider>
       </ThemeProvider>
     </CacheProvider>
   );
