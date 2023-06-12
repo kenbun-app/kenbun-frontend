@@ -44,6 +44,19 @@ class APIHandler {
       return res.json()
     }))
   }
+  postUrl: (url: string) => Promise<string> = (url) => {
+    return this.withRefresh(() => fetch(
+      this.constructUrl("/v1/url"), {
+        method: "POST",
+        headers: this.constructHeaders(),
+        body: JSON.stringify({ url })
+      }
+    ).then((res: Response) => {
+      if (res.status === 401) return Promise.reject("Unauthorized")
+      if (res.status !== 201) return Promise.reject(`${res.statusText} (${res.status})`)
+      return res.json()
+    }))
+  }
 }
 
 export type ApiContextProps = {
