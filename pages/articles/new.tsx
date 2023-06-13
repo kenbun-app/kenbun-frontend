@@ -1,19 +1,19 @@
 import * as React from 'react';
 import Container from '@mui/material/Container';
 import NewUrlForm from '@/src/components/NewUrlForm';
+import { useSnackbar } from 'notistack';
 
 export default function ArticlesNew() {
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-      url: data.get('url'),
-    });
-  };
+  const { enqueueSnackbar } = useSnackbar();
+  const handleRegister = (url: string) => {
+    enqueueSnackbar(`Registered: ${url}`, { variant: "success" })
+  }
+  const handleError = (reason: any) => {
+    enqueueSnackbar(reason, { variant: "error" })
+  }
   return (
     <Container maxWidth="lg">
-      <NewUrlForm />
+      <NewUrlForm onUrlRegistrationSucceeded={handleRegister} onUrlRegistrationFailed={handleError} />
     </Container>
   );
 }
